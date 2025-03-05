@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignInFragment">
+
+<ImageView
+    android:id="@+id/img_prod"
+    android:layout_width="match_parent"
+    android:layout_height="340dp"
+    android:src="@drawable/image_prod"
+    android:scaleType="centerCrop"/>
+    
+    
+<ImageView
+
+    android:id="@+id/app_icon"
+    android:layout_width="88.00dp"
+    android:layout_height="80dp"
+    android:src="@drawable/app_icon"
+    android:layout_below="@id/img_prod"
+    android:layout_centerInParent="true"
+    android:layout_margin="15dp"
+    android:padding="5dp"/>
+    
+    <TextView
+        android:id="@+id/tv_india_best"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/india_s_best_last_minute_app"
+        android:layout_below="@id/app_icon"
+        android:layout_centerInParent="true"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/tv_login_or_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_or_sign_up"
+        android:textSize="16.90sp"
+        android:layout_below="@id/tv_india_best"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"/>
+
+
+<EditText
+    android:id="@+id/edit_tvuserNum"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/tv_login_or_signup"
+    android:hint="@string/enter_mobile_number"
+    android:layout_margin="20dp"
+    android:inputType="number"
+    android:background="@drawable/edit_bg"
+    android:padding="17dp"
+    android:drawableStart="@drawable/baseline_call_24"
+    android:drawablePadding="9dp"/>
+
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_tvuserNum"
+        android:layout_marginEnd="20dp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/gray_light"
+        android:background="@drawable/edit_bg"
+        android:padding="17dp"/>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffbe0b"
+    android:layout_height="match_parent"
+    tools:context=".SplashFragment">
+
+
+
+
+    <TextView
+        android:id="@+id/tvBlinkit"
+        android:layout_width="wrap_content"
+        android:layout_height="91.00dp"
+        android:text="@string/blinkit"
+        android:textSize="78.00sp"
+     android:layout_centerVertical="true"
+        android:layout_marginStart="75dp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
+    
+    <TextView
+        android:id="@+id/tvIt"
+        android:layout_width="wrap_content"
+        android:layout_height="91.00dp"
+        android:text="@string/it"
+        android:layout_toEndOf="@id/tvBlinkit"
+        android:textSize="78.00sp"
+        android:layout_centerVertical="true"
+        android:textStyle="bold"
+        android:textColor="@color/green"/>
+    
+    <TextView
+        android:id="@+id/tv_last_minute_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/india_s_last_minute_app"
+        android:layout_below="@id/tvBlinkit"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="300dp"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_last_minute_app"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="50dp"
+        android:background="@color/gray"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/a_zomato_company"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/view"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+/>
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+</RelativeLayout>
