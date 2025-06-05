@@ -1,5 +1,6 @@
 package com.example.blinkitclone
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -9,12 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.example.blinkitclone.activity.UserActivity
 import com.example.blinkitclone.databinding.FragmentSplashBinding
+import com.example.blinkitclone.viewmodel.AuthViewModel
+import kotlinx.coroutines.launch
 
 
 class SplashFragment : Fragment() {
+
+    private val viewmodel : AuthViewModel by viewModels()
 
     private  lateinit var binding: FragmentSplashBinding
 
@@ -25,6 +33,23 @@ class SplashFragment : Fragment() {
 
 
         binding = FragmentSplashBinding.inflate(layoutInflater)
+
+// for if user already have login so redirect to home fragment
+
+        lifecycleScope.launch {
+            viewmodel.isCurrentUser.collect{
+                 if (it){
+                     startActivity(Intent(requireActivity(),UserActivity::class.java))
+                     requireActivity().finish()
+                 } else{
+                     findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+                 }
+            }
+        }
+
+
+
+
 
         Handler(Looper.getMainLooper()).postDelayed({
             val navOptions = NavOptions.Builder()

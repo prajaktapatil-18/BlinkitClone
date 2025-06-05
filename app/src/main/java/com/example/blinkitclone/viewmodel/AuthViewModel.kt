@@ -1,6 +1,7 @@
 package com.example.blinkitclone.viewmodel
 
 import android.app.Activity
+import androidx.credentials.Credential
 import androidx.lifecycle.ViewModel
 import com.example.blinkitclone.Utils
 import com.example.blinkitclone.models.Users
@@ -13,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.concurrent.TimeUnit
 
-class AuthViewModel: ViewModel() {
+class AuthViewModel : ViewModel() {
 
 
     private val _isSignInSuccessfully = MutableStateFlow(false)
@@ -33,6 +34,14 @@ class AuthViewModel: ViewModel() {
 
     private val _isCurrentUser = MutableStateFlow(false)
     val isCurrentUser = _isCurrentUser
+
+
+    init {
+
+        Utils.getFirebaseInstance().currentUser?.let {
+            _isCurrentUser.value = true
+        }
+    }
 
 
     fun sendOTP(usernumber: String, activity: Activity) {
@@ -59,27 +68,28 @@ class AuthViewModel: ViewModel() {
             }
         }
 
-            // verification code from firebase
-            val options = PhoneAuthOptions.newBuilder(Utils.getFirebaseInstance())
-                .setPhoneNumber("+91$usernumber") // Phone number to verify
-                .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                .setActivity(activity) // Activity (for callback binding)
-                .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
-                .build()
-            PhoneAuthProvider.verifyPhoneNumber(options)
+        // verification code from firebase
+        val options = PhoneAuthOptions.newBuilder(Utils.getFirebaseInstance())
+            .setPhoneNumber("+91$usernumber") // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(activity) // Activity (for callback binding)
+            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
 
-        }
     }
 
-    fun signInWithPhoneAuthCredential(otp: String, usernumber: String, user: Users) {
-        val credential = PhoneAuthProvider.getCredential()
+
+    fun signInWithPhoneAuthCredential(otp: String, userNumber: String, user: Users) {
+        val credential = PhoneAuthProvider.getCredential(_verificationId.value.toString(),otp)
         Utils.getFirebaseInstance().signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
 
                     FirebaseDatabase.getInstance().getReference("AllUsers").child("Users")
                         .child(user.uid!!).setValue(user)
-                //
+                    _isSignInSuccessfully.value = true
+                    //
 
                     val user = task.result?.user
                 } else {
@@ -88,3 +98,5 @@ class AuthViewModel: ViewModel() {
                 }
             }
     }
+
+}

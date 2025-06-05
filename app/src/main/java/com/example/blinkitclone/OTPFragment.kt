@@ -1,5 +1,6 @@
 package com.example.blinkitclone
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -18,6 +19,9 @@ import com.example.blinkitclone.viewmodel.AuthViewModel
 import kotlinx.coroutines.launch
 
 class OTPFragment : Fragment() {
+
+
+
     private val viewmodel: AuthViewModel by viewModels()
     private lateinit var binding: FragmentOTPBinding
     lateinit var userNumber: String
@@ -32,7 +36,7 @@ class OTPFragment : Fragment() {
         customisingEnteringOTP()
         sendOTP()
         onLoginButtonClick()
-          backButtonPressed()
+        backButtonPressed()
 
         return binding.root
     }
@@ -41,6 +45,7 @@ class OTPFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {
             Utils.showDialog(requireContext(), "signing you")
+
             val editText = arrayOf(
                 binding.otp1,
                 binding.otp2,
@@ -55,9 +60,9 @@ class OTPFragment : Fragment() {
                 Utils.showToast(requireContext(), "please enter valid otp")
             } else {
                 editText.forEach { it.text?.clear(); it.clearFocus() }
-            }
-            verifyOTP(otp)
 
+                verifyOTP(otp)
+            }
         }
 
     }
@@ -74,6 +79,7 @@ class OTPFragment : Fragment() {
                     Utils.showToast(requireContext(), "loggeed in..")
                     startActivity(Intent(requireActivity(), UserActivity::class.java))
                     requireActivity().finish()
+
                 }
             }
         }
